@@ -5,12 +5,18 @@
 <title>SPELLING BEE</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Henny+Penny&family=Schoolbell&display=swap" rel="stylesheet">
+
+  
 <style>
 html,body{
   margin:0;padding:0;
   width:100%;
   overflow-x:hidden;
-  font-family:system-ui,-apple-system,sans-serif;
+  font-family:'Schoolbell', system-ui,-apple-system,sans-serif;
 }
 :root{
   --bg:#eef6f1;
@@ -34,12 +40,14 @@ html,body{
   text-align:center;
   font-size:30px;
   font-weight:900;
+  font-family:'Henny Penny', cursive;
 }
 #subtitle{
   text-align:center;
   font-size:14px;
   opacity:.5;
   margin-bottom:10px;
+  font-family:'Schoolbell', cursive;
 }
 #topBtns{
   display:flex;
@@ -50,45 +58,14 @@ html,body{
   height:44px;
   border:none;
   border-radius:16px;
+  font-size:16px;
+  letter-spacing:0.5px;
   font-weight:900;
+  font-family:'Schoolbell', cursive;
 }
 .play{background:var(--primary);color:#fff;}
 .pause{background:var(--primary);color:#fff;}
 .stop{background:var(--primary);color:#fff;}
-
-#fileBox{
-  margin-top:8px;
-  display:flex;
-  justify-content:center;
-  gap:6px;
-}
-.fileBtn,.helpBtn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  height:34px;
-  padding:0 14px;
-  border-radius:14px;
-  background:var(--primary);
-  color:#fff;
-  font-weight:700;
-  font-size:13px;
-  cursor:pointer;
-}
-.helpBtn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  height:34px;
-  padding:0 14px;
-  border-radius:14px;
-  background:var(--primary);
-  color:#fff;
-  font-weight:700;
-  font-size:13px;
-  cursor:pointer;
-}
-.fileBtn input{display:none;}
 
 /* ===== TABLE ===== */
 .wrapper{
@@ -112,11 +89,13 @@ tr.active td{background:#fff3bf;}
   font-size:16px;
   font-weight:800;
   white-space:nowrap;
+  font-family:'Schoolbell', cursive;
 }
 .sentence{
   font-size:14px;
   line-height:1.5;
   overflow-wrap:break-word;
+  font-family:'Schoolbell', cursive;
 }
 .spellBtn{
   background:var(--blue);
@@ -139,28 +118,80 @@ th:nth-child(4),td:nth-child(4){width:20%;}
 /* ===== BOTTOM ===== */
 #bottom{
   position:fixed;
-  bottom:0;left:0;right:0;
-  background:var(--bg);
-  padding:12px;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#eef6f1;
+  padding:10px;
   display:flex;
   gap:8px;
   align-items:center;
   z-index:1000;
   box-shadow:0 -6px 12px rgba(0,0,0,.15);
 }
-#startRow{
-  width:60px;
-  height:36px;
-  border-radius:12px;
-  border:none;
-  text-align:center;
-}
-#timer{
-  margin-left:auto;
-  background:#fff;
-  padding:10px 16px;
-  border-radius:14px;
+
+/* BUTTON UMUM */
+.bottom-btn{
+  height:44px;
+  padding:0 14px;
+  border-radius:18px;
+  background:#6c8cff;
+  color:white;
   font-weight:800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  white-space:nowrap;
+}
+
+/* UPLOAD */
+.upload-btn input{
+  display:none;
+}
+
+/* INSTRUCTION */
+.help-btn{
+  width:44px;
+  padding:0;
+  font-size:20px;
+}
+
+/* START ROW GROUP */
+.bottom-group{
+  display:flex;
+  align-items:center;
+  background:#5fb3a2;
+  border-radius:18px;
+  padding:4px 8px;
+  height:44px;
+  gap:6px;
+  color:white;
+  font-weight:800;
+}
+
+.bottom-group input{
+  width:50px;
+  border:none;
+  border-radius:10px;
+  text-align:center;
+  height:30px;
+}
+
+.bottom-group button{
+  border:none;
+  border-radius:10px;
+  background:#1e40af;
+  color:white;
+  font-weight:800;
+  padding:6px 10px;
+}
+
+/* TIMER */
+.timer-btn{
+  margin-left:auto;
+  background:#1e40af;
+  font-size:16px;
 }
 
 /* ===== POPUP ===== */
@@ -180,6 +211,7 @@ th:nth-child(4),td:nth-child(4){width:20%;}
   border-radius:20px;
   padding:20px;
   animation:pop .25s ease;
+  font-family:'Schoolbell', cursive;
 }
 @keyframes pop{
   from{transform:scale(.9);opacity:0}
@@ -220,19 +252,10 @@ th:nth-child(4),td:nth-child(4){width:20%;}
   </div>
 
   <div id="topBtns">
-    <button class="btn play" onclick="playAll()">▶ PLAY ALL</button>
-    <button class="btn pause" id="pauseBtn" onclick="pauseResume()">⏸ PAUSE</button>
-    <button class="btn stop" onclick="stopAll()">⏹ STOP</button>
+    <button class="btn play" onclick="playAll()">▶ play all</button>
+    <button class="btn pause" id="pauseBtn" onclick="pauseResume()">⏸ pause</button>
+    <button class="btn stop" onclick="stopAll()">⏹ stop</button>
   </div>
-
-  <div id="fileBox">
-    <label class="fileBtn">
-      📂 CHOOSE YOUR FILE
-      <input type="file" accept=".csv" onchange="loadCSV(event)">
-    </label>
-    <div class="helpBtn" onclick="openHelp()">INSTRUCTION</div>
-  </div>
-</div>
 
 <!-- TABLE -->
 <div class="wrapper">
@@ -251,13 +274,27 @@ th:nth-child(4),td:nth-child(4){width:20%;}
 
 <!-- BOTTOM -->
 <div id="bottom">
-  START FROM ROW : 
-  <input type="number" id="startRow" value="1" min="1">
-  <button class="btn play" onclick="playFromRow()">GO</button>
-  <div id="timer">⏱️ 20</div>
-</div>
+
+  <!-- 1. UPLOAD FILE -->
+  <label class="bottom-btn upload-btn">
+    📂 Upload File
+    <input type="file" accept=".csv" onchange="loadCSV(event)">
+  </label>
+
+  <!-- 2. INSTRUCTION -->
+  <button class="bottom-btn help-btn" onclick="openHelp()">❓</button>
+
+  <!-- 3. START ROW GROUP -->
+  <div class="bottom-group">
+    <input type="number" id="startRow" value="1" min="1">
+    <button onclick="playFromRow()">GO</button>
+  </div>
+
+  <!-- 4. TIMER -->
+  <div class="bottom-btn timer-btn" id="timer">20</div>
 
 </div>
+
 
 <!-- POPUP -->
 <div id="helpOverlay" onclick="closeHelp(event)">
@@ -453,14 +490,14 @@ async function spell(i){
 function pauseResume(){
   paused=!paused;
   paused?speechSynthesis.pause():speechSynthesis.resume();
-  pauseBtn.textContent=paused?"▶ RESUME":"⏸ PAUSE";
+  pauseBtn.textContent=paused?"▶ resume":"⏸ pause";
 }
 function stopAll(){
   playing=false; paused=false;
   speechSynthesis.cancel();
   clearTimer();
   timer.textContent="⏱️ 20";
-  pauseBtn.textContent="⏸ PAUSE";
+  pauseBtn.textContent="⏸ pause";
 }
 
 /* POPUP */
@@ -476,14 +513,3 @@ function closeHelp(e){
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
